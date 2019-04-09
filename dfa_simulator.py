@@ -95,5 +95,8 @@ def applyStrings():
         print("Please provide a file of strings to test")
     loopThrough()
 
-readDFA()
-applyStrings()
+def main():
+    readDFA()
+    applyStrings()
+
+main()
