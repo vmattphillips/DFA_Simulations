@@ -7,6 +7,7 @@ import re
 import sys
 
 # Global Variables
+# Mostly attributes belonging to DFAs
 dfa = OrderedDict()
 trans = []
 DFA_desc = []
@@ -59,19 +60,8 @@ def assignStates():
             for z in range(len(E)):
                 dfa[states][x] = trans[states][y]
 
-def readDFA():
-    #print("readDFA")
-    global F
-    global DFA_desc
-    global dfa
-    # reading the file into a variable I can manipulate
-    DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
-    assignValues()
-    transTable()
-    assignStates()
-
 def loopThrough():
-    print
+    #print if the strings are accepted or not
     global inputStrings
     global F
     try:
@@ -86,10 +76,21 @@ def loopThrough():
     except Exception as error:
         print("Error thrown at: ", error)
 
+def readDFA():
+     #print("readDFA")
+     global F
+     global DFA_desc
+     global dfa
+     # reading the file into a variable I can manipulate
+     DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
+     assignValues()
+     transTable()
+     assignStates()
+
 def applyStrings():
     # Checks if the given DFA accepts the given strings
     global inputStrings
-    try:
+    try: #strips the string of un-needed chars
         inputStrings = [read.rstrip('\n') for read in open(sys.argv[2])]
     except Exception as error:
         print("Please provide a file of strings to test")
