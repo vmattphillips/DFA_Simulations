@@ -114,7 +114,7 @@ def simHomo():
     h_trans = OrderedDict()
     for a in range(Q):
         # Test
-        abx = a * 2
+        abx = a
         h_trans[a] = OrderedDict()
         for b in h_E:
             #Test
