@@ -1,7 +1,7 @@
-    
+
 # Victor Phillips CSCE 355
-# Choice # x
-# Inverse
+# Choice # 5
+# Inverse Homomorphic Image
 from collections import OrderedDict
 import re
 import sys
@@ -82,16 +82,16 @@ def loopThrough():
         print("Error thrown at: ", error)
 
 def readDFA():
-     #print("readDFA")
-     global F
-     global DFA_desc
-     global dfa
-     # reading the file into a variable I can manipulate
-     DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
-     dictTest()
-     assignValues()
-     transTable()
-     assignStates()
+    #print("readDFA")
+    global F
+    global DFA_desc
+    global dfa
+    # reading the file into a variable I can manipulate
+    DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
+    #dictTest()
+    assignValues()
+    transTable()
+    assignStates()
 
 def applyStrings():
     # Checks if the given DFA accepts the given strings
@@ -102,8 +102,49 @@ def applyStrings():
         print("Please provide a file of strings to test")
     loopThrough()
 
+def simHomo():
+    h_desc = [read.rstrip('\n') for read in open(sys.argv[2])]
+    skippableChars = 16
+
+    h_E = h_desc[0][skippableChars:]
+    h_E = list(h_E)
+
+    # Generating new transition table
+    global Q
+    h_trans = OrderedDict()
+    for a in range(Q):
+        h_trans[a] = OrderedDict()
+        for b in h_E:
+            h_trans[a][b] = ''
+
+    # Saving the h strings
+    h_str = h_desc[2:]
+    h_str = list(h_str)
+
+    # Moving through h strings to match to new table
+    for d, a in enumerate(h_E):
+        for b in range(Q):
+            S = b
+            for c in h_str[d]:
+                S = dfa[int(S)][c]
+            h_trans[b][a] = S
+
+    print("Number of States: ", Q)
+    print(DFA_desc[1])
+    print("Alphabet: ", end="")
+    for a in h_E:
+        print(a, end="")
+    print()
+
+    for a in h_trans:
+        for b in h_trans[a]:
+            print(h_trans[a][b], end="")
+        print()
+
+
 
 def main():
-  readDFA()
+    readDFA()
+    simHomo()
 
 main()
