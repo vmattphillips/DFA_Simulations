@@ -113,8 +113,12 @@ def simHomo():
     global Q
     h_trans = OrderedDict()
     for a in range(Q):
+        # Test
+        abx = a * 2
         h_trans[a] = OrderedDict()
         for b in h_E:
+            #Test
+            abx = b
             h_trans[a][b] = ''
 
     # Saving the h strings
