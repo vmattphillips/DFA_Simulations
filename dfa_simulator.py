@@ -5,6 +5,7 @@
 from collections import OrderedDict
 import re
 import sys
+import string
 
 # Global Variables
 # Mostly attributes belonging to DFAs
@@ -15,6 +16,16 @@ F = []
 E = []
 Q = ''
 inputStrings = ''
+
+def dictTest():
+    #testing how these functions work, never used
+    #some of them. TODO: remove this before uploading
+    numOfStatesTest = DFA_desc[0]
+    numOfStatesTest = re.sub("\D", "", numOfStatesTest)
+    FTEST = DFA_desc[1]
+    FTEST = int(re.sub("\D", "", FTEST))
+    FTEST = [int(d) for d in str(FTEST)]
+    #print(FTEST)
 
 def fillDictionary():
     #print("fillDict")
@@ -36,9 +47,13 @@ def assignValues():
     global E
     global dfa
     skippableChars = 10
-    Q = int(''.join(a for a in DFA_desc[0] if a.isdigit()))
-    F = [int(a) for a in DFA_desc[1].split() if a.isdigit()]
-    E = [a for a in DFA_desc[2][skippableChars:]]
+
+    Q = int(re.sub("\D", "", DFA_desc[0]))
+
+    F = int(re.sub("\D", "", DFA_desc[1]))
+    F = [int(d) for d in str(F)]
+
+    E  = [a for a in DFA_desc[2][skippableChars:]]
     fillDictionary()
 
 def transTable():
@@ -68,10 +83,10 @@ def loopThrough():
         for i in inputStrings:
             state = '0'
             for j in i:
-                state = dfa [int(state)][j]
+                state = dfa[int(state)][j]
             if int(state) in F:
                 print("accepted")
-            else:
+            elif int(state) not in F:
                 print("rejected")
     except Exception as error:
         print("Error thrown at: ", error)
@@ -83,6 +98,7 @@ def readDFA():
      global dfa
      # reading the file into a variable I can manipulate
      DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
+     dictTest()
      assignValues()
      transTable()
      assignStates()
