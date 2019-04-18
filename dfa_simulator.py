@@ -90,6 +90,7 @@ def loopThrough():
                 print("rejected")
     except Exception as error:
         print("Error thrown at: ", error)
+        sys.exit()
 
 def readDFA():
      #print("readDFA")
@@ -97,7 +98,11 @@ def readDFA():
      global DFA_desc
      global dfa
      # reading the file into a variable I can manipulate
-     DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
+     try:
+        DFA_desc = [read.rstrip('\n') for read in open(sys.argv[1])]
+     except Exception as error:
+        print("You need to provide a text file with a DFA to simulate.")
+        sys.exit()
      dictTest()
      assignValues()
      transTable()
@@ -109,7 +114,8 @@ def applyStrings():
     try: #strips the string of un-needed chars
         inputStrings = [read.rstrip('\n') for read in open(sys.argv[2])]
     except Exception as error:
-        print("Please provide a file of strings to test")
+        print("You need to provide a text file with strings to test.")
+        sys.exit()
     loopThrough()
 
 def main():
