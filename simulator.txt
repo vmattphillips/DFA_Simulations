@@ -1,0 +1,5 @@
+# Victor Phillips CSCE 355
+
+Build:
+Run:
+  python3 dfa_simulator.py
