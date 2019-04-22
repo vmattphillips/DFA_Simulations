@@ -103,7 +103,7 @@ def readDFA():
      except Exception as error:
         print("You need to provide a text file with a DFA to simulate.")
         sys.exit()
-     dictTest()
+     #dictTest()
      assignValues()
      transTable()
      assignStates()
