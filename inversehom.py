@@ -40,8 +40,7 @@ def assignValues():
 
     Q = int(re.sub("\D", "", DFA_desc[0]))
 
-    F = int(re.sub("\D", "", DFA_desc[1]))
-    F = [int(d) for d in str(F)]
+    F = [int(a) for a in DFA_desc[1].split() if a.isdigit()]
 
     E  = [a for a in DFA_desc[2][skippableChars:]]
     fillDictionary()
