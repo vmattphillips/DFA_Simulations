@@ -85,9 +85,9 @@ def loopThrough():
             for j in i:
                 state = dfa[int(state)][j]
             if int(state) in F:
-                print("accepted")
+                print("accept")
             elif int(state) not in F:
-                print("rejected")
+                print("reject")
     except Exception as error:
         print("Error thrown at: ", error)
         sys.exit()
