@@ -132,7 +132,7 @@ def simHomo():
                 S = dfa[int(S)][c]
             h_trans[b][a] = S
 
-    print("Number of States:", Q)
+    print("Number of states:", Q)
     print(DFA_desc[1])
     print("Alphabet: ", end="")
     for a in h_E:
